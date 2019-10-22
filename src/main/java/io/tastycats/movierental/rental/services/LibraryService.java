@@ -3,12 +3,16 @@ package io.tastycats.movierental.rental.services;
 
 import io.tastycats.movierental.rental.models.Library;
 import io.tastycats.movierental.rental.models.Movie;
+import io.tastycats.movierental.rental.models.User;
 import io.tastycats.movierental.rental.repos.LibraryRepo;
 import io.tastycats.movierental.rental.repos.MovieRepo;
+import io.tastycats.movierental.rental.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +26,9 @@ public class LibraryService {
     @Autowired
     private LibraryRepo libraryRepo;
 
+    @Autowired
+    private UserRepo userRepo;
+
     public Library rentMovie(Map<String, String> requestParam) {
         if (requestParam.containsKey("uid") && requestParam.containsKey("mid")) {
             Library newRent = new Library();
@@ -29,6 +36,7 @@ public class LibraryService {
             String userId = requestParam.get("uid");
 
             Movie movieToBook = movieRepo.findById(movieId).orElse(new Movie());
+            User userToBookFor = userRepo.findById(userId).orElse(new User());
             movieToBook.setCopiesAvailable(movieToBook.getCopiesAvailable() - 1);
             newRent.setMovieId(movieToBook.getId());
             newRent.setUserId(userId);
@@ -36,13 +44,42 @@ public class LibraryService {
             newRent.setReturnDate(LocalDate.now().plusDays(14));
 
             movieRepo.save(movieToBook);
-            return libraryRepo.save(newRent);
-
+            Library newBooking =  libraryRepo.save(newRent);
+            userToBookFor.getBookingIds().add(newBooking.getId());
+            userRepo.save(userToBookFor);
+            return newBooking;
         }
         return null;
     }
 
     public List<Library> getAllBookings() {
         return libraryRepo.findAll();
+    }
+
+    public Library returnMovie(String bookingId) {
+        Library booking = libraryRepo.findById(bookingId).orElse(new Library());
+        String movieId = booking.getMovieId();
+        String userId = booking.getUserId();
+
+        User userReturning = userRepo.findById(userId).orElse(new User());
+        Movie movieReturned = movieRepo.findById(movieId).orElse(new Movie());
+
+        movieReturned.setCopiesAvailable(movieReturned.getCopiesAvailable() + 1);
+        movieRepo.save(movieReturned);
+
+        userReturning.getBookingIds().remove(bookingId);
+
+        long dateDifference = ChronoUnit.DAYS.between(booking.getReturnDate(), LocalDate.now());
+//        dateDifference.
+
+        if (dateDifference > 0) {
+            // late return
+            userReturning.setFine((int)dateDifference * 10);
+        }
+        userRepo.save(userReturning);
+
+        libraryRepo.delete(booking);
+
+        return booking;
     }
 }

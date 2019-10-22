@@ -30,4 +30,9 @@ public class LibraryController {
     public Library rentMovie(@RequestParam Map<String, String> requestParam) {
         return libraryService.rentMovie(requestParam);
     }
+
+    @PostMapping("/return/{id}")
+    public Library returnMovie(@PathVariable("id") String id) {
+        return libraryService.returnMovie(id);
+    }
 }

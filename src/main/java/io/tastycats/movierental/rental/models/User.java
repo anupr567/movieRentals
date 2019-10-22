@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ public class User {
     private String id;
 
     private String name;
-    private List<String> bookingIds;
+    private List<String> bookingIds = new ArrayList<>();
 
     private int fine = 0;
 }

@@ -35,8 +35,8 @@ public class LibraryService {
             String movieId = requestParam.get("mid");
             String userId = requestParam.get("uid");
 
-            Movie movieToBook = movieRepo.findById(movieId).orElse(new Movie());
-            User userToBookFor = userRepo.findById(userId).orElse(new User());
+            Movie movieToBook = movieRepo.findById(movieId).get();
+            User userToBookFor = userRepo.findById(userId).get();
             movieToBook.setCopiesAvailable(movieToBook.getCopiesAvailable() - 1);
             newRent.setMovieId(movieToBook.getId());
             newRent.setUserId(userId);
@@ -57,12 +57,12 @@ public class LibraryService {
     }
 
     public Library returnMovie(String bookingId) {
-        Library booking = libraryRepo.findById(bookingId).orElse(new Library());
+        Library booking = libraryRepo.findById(bookingId).get();
         String movieId = booking.getMovieId();
         String userId = booking.getUserId();
 
-        User userReturning = userRepo.findById(userId).orElse(new User());
-        Movie movieReturned = movieRepo.findById(movieId).orElse(new Movie());
+        User userReturning = userRepo.findById(userId).get();
+        Movie movieReturned = movieRepo.findById(movieId).get();
 
         movieReturned.setCopiesAvailable(movieReturned.getCopiesAvailable() + 1);
         movieRepo.save(movieReturned);

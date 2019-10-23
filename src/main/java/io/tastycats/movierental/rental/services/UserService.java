@@ -14,7 +14,7 @@ public class UserService {
     private UserRepo userRepo;
 
     public User getUserById(String id) {
-        return userRepo.findById(id).orElse(new User());
+        return userRepo.findById(id).get();
     }
 
 //    public User saveUserById(String id) {

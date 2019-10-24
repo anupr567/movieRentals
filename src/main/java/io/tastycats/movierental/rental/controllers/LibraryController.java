@@ -6,6 +6,8 @@ import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.services.LibraryService;
 import io.tastycats.movierental.rental.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +36,11 @@ public class LibraryController {
     @PostMapping("/return/{id}")
     public Library returnMovie(@PathVariable("id") String id) {
         return libraryService.returnMovie(id);
+    }
+
+    @PostMapping("/extend/{id}")
+    public @ResponseBody
+    ResponseEntity<Library> extendBooking() {
+        return new ResponseEntity<Library>(new Library(), HttpStatus.CREATED);
     }
 }

@@ -1,10 +1,7 @@
 package io.tastycats.movierental.rental.repos;
 
 import io.tastycats.movierental.rental.models.Movie;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -34,6 +31,10 @@ public class TestMovieRepo {
         testMovie.setCast(List.of("actor", "actwo"));
         testMovie.setDirectorNames(List.of("director", "dirtwo"));
         pageable = PageRequest.of(0, 10);
+    }
+
+    @AfterEach
+    public void cleanObjects() {
         movieRepo.deleteAll();
     }
 

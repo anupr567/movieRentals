@@ -60,7 +60,9 @@ public class TestMovieService {
     @Test
     public void serviceCanStore() {
         Assertions.assertEquals(
-                testMovie.getCopiesAvailable(),  movieService.addMovie(testMovie).getCopiesAvailable()
+                testMovie.getCopiesAvailable(),
+                movieService.addMovie(testMovie).getCopiesAvailable(),
+                "check if service can store and retrieve data"
         );
     }
 
@@ -68,7 +70,8 @@ public class TestMovieService {
     public void serviceCanFindAll() {
         Assertions.assertEquals(
                 1,
-                movieService.findAllMovies(queryMap).size()
+                movieService.findAllMovies(queryMap).size(),
+                "service can find all movies"
         );
     }
 
@@ -76,13 +79,15 @@ public class TestMovieService {
     public void serviceCanAddMultiple() {
         Assertions.assertEquals(
                 2,
-                movieService.addMultiple(testMovies).size()
+                movieService.addMultiple(testMovies).size(),
+                "service can add multiple movies"
         );
 
 
         Assertions.assertEquals(
                 11,
-                movieService.addMultiple(testMovies).get(1).getCopiesAvailable()
+                movieService.addMultiple(testMovies).get(1).getCopiesAvailable(),
+                "and retrieve them reliably"
         );
     }
 }

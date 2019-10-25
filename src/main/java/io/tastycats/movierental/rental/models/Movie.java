@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@Document(collection = "library")
+@Document(collection = "movies")
 public class Movie {
     @Id
     private String id;

@@ -31,5 +31,4 @@ public class Movie {
     private int releaseDay;
 
     private int copiesAvailable;
-
 }

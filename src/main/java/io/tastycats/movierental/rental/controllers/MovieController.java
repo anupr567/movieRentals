@@ -2,7 +2,9 @@ package io.tastycats.movierental.rental.controllers;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;

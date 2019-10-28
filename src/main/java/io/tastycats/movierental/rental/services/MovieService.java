@@ -64,6 +64,9 @@ public class MovieService {
         return new ArrayList<>();
     }
 
+    public long getCountOfMovies(){
+        return movieRepo.count();
+    }
     public Movie getMovieById(String id) {
         return movieRepo.findById(id).get();
     }

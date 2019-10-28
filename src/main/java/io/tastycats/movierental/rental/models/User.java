@@ -28,5 +28,6 @@ public class User {
 
     @Indexed(unique = true)
     private String userName;
-    private String hashedPassword;
+    private String password;
+    private String role;
 }

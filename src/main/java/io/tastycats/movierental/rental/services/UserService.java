@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class UserService implements UserServiceInterface {
-
     @Autowired
     private UserRepo userRepo;
 
@@ -27,7 +26,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User getUserById(String id) {
-        return userRepo.findById(id).get();
+            return userRepo.findById(id).get();
     }
 
 //    public User saveUserById(String id) {
@@ -48,7 +47,7 @@ public class UserService implements UserServiceInterface {
         return userRepo.findAll();
     }
 
-    public User addMovieToWishList(String userId,String movieId) {    // Anup
+    public User addMovieToWishList(String userId,String movieId) {
         User user = getUserById(userId);
         Movie movie = movieService.getMovieById(movieId);
         user.addMovieToWishList(movie);

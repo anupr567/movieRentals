@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface UserRepo extends MongoRepository<User, String> {
-    public User findUserByUserName(String userName);
+//    public User findUserByUserName(String userName);
     //    @Query(value = "{ 'userId' : ?0 }", fields = "{ 'user.wishList' : 1 }")  // using Query get only wishList
     Optional<User> findById(String userId);
 }

@@ -22,8 +22,8 @@ public class User {
     private String id;
 
     private String name;
-    private List<String> bookingIds = new ArrayList<>();
-
+    private List<String> presentBookingIds = new ArrayList<>();
+    private List<String> historyBookingIds = new ArrayList<>();
     private int fine = 0;
 
 //    @Indexed(unique = true)
@@ -31,7 +31,6 @@ public class User {
 //    private String password;
 //    private String role;
     List<Movie> wishList = new ArrayList<>();
-
     public void addMovieToWishList(Movie movie) {
         wishList.add(movie);
     }

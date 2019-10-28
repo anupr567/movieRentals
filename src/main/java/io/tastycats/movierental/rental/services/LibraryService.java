@@ -45,7 +45,7 @@ public class LibraryService {
 
             movieRepo.save(movieToBook);
             Library newBooking =  libraryRepo.save(newRent);
-            userToBookFor.getBookingIds().add(newBooking.getId());
+            userToBookFor.getPresentBookingIds().add(newBooking.getId());
             userRepo.save(userToBookFor);
             return newBooking;
         }
@@ -66,8 +66,8 @@ public class LibraryService {
 
         movieReturned.setCopiesAvailable(movieReturned.getCopiesAvailable() + 1);
         movieRepo.save(movieReturned);
-
-        userReturning.getBookingIds().remove(bookingId);
+        userReturning.getPresentBookingIds().remove(bookingId);
+        userReturning.getHistoryBookingIds().add(bookingId);
 
         long dateDifference = ChronoUnit.DAYS.between(booking.getReturnDate(), LocalDate.now());
 //        dateDifference.

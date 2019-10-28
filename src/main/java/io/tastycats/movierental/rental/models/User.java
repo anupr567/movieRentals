@@ -22,6 +22,9 @@ public class User {
     private String id;
 
     private String name;
+    private String address;
+    private String phoneNo;
+    private String email;
     private List<String> presentBookingIds = new ArrayList<>();
     private List<String> historyBookingIds = new ArrayList<>();
     private int fine = 0;

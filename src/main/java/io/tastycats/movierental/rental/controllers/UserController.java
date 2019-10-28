@@ -29,4 +29,14 @@ public class UserController {
     public List<User> saveUsers(@RequestBody List<User> users) {
         return userService.saveUsers(users);
     }
+
+    @GetMapping("/{id}/wishList")
+    public User getUserWishList(@PathVariable("id") String id) {
+        return userService.getWishList(id);
+    }
+
+    @PostMapping("/{userId}/{movieId}")
+    public User addMovieToWishList(@PathVariable("userId") String userId, @PathVariable("movieId") String movieId){
+        return userService.addMovieToWishList(userId,movieId);
+    }
 }

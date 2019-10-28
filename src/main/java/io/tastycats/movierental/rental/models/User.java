@@ -30,4 +30,9 @@ public class User {
     private String userName;
     private String password;
     private String role;
+    List<Movie> wishList = new ArrayList<>();
+
+    public void addMovieToWishList(Movie movie) {
+        wishList.add(movie);
+    }
 }

@@ -1,21 +1,29 @@
 package io.tastycats.movierental.rental.services;
 
+import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.models.User;
+import io.tastycats.movierental.rental.repos.MovieRepo;
 import io.tastycats.movierental.rental.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.authority.AuthorityUtils;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService implements UserServiceInterface, UserDetailsService {
+public class UserService implements UserServiceInterface {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private MovieRepo movieRepo;
+
+    @Autowired
+    private MovieService movieService;
 
     @Override
     public User getUserById(String id) {
@@ -40,11 +48,21 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         return userRepo.findAll();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User currentUser = userRepo.findUserByUserName(userName);
-        UserDetails user = new org.springframework.security.core.userdetails.User(userName, currentUser.getPassword()
-        , true, true, true, true, AuthorityUtils.createAuthorityList(currentUser.getRole()));
-        return user;
+    public User addMovieToWishList(String userId,String movieId) {    // Anup
+        User user = getUserById(userId);
+        Movie movie = movieService.getMovieById(movieId);
+        user.addMovieToWishList(movie);
+        return userRepo.save(user);
     }
+    public User getWishList(String id) {
+        return userRepo.findById(id).get();
+    }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+//        User currentUser = userRepo.findUserByUserName(userName);
+//        UserDetails user = new org.springframework.security.core.userdetails.User(userName, currentUser.getPassword()
+//        , true, true, true, true, AuthorityUtils.createAuthorityList(currentUser.getRole()));
+//        return user;
+//    }
 }

@@ -22,12 +22,12 @@ public class RentalApplication implements CommandLineRunner {
 		admin.setUserName("admin");
 		admin.setPassword("$2a$10$lNwUEiaakvgkjU13d4g/i.6IkuKdfGBbLQx.S8GZiTN2cX9oeCrQC");
 		admin.setRole("ADMIN");
-		userRepo.save(admin);
+//		userRepo.save(admin);
 
 		User user = new User();
 		user.setUserName("user");
 		user.setRole("USER");
 		user.setPassword("$2a$10$LDjTY1GyM93qPoQs2DAg7OuEN2otsPmbCxNdFGzgBqwyiQ7oQVQy2");
-		userRepo.save(user);
+//		userRepo.save(user);
 	}
 }

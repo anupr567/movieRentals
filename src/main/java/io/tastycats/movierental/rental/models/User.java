@@ -26,10 +26,10 @@ public class User {
 
     private int fine = 0;
 
-    @Indexed(unique = true)
-    private String userName;
-    private String password;
-    private String role;
+//    @Indexed(unique = true)
+//    private String userName;
+//    private String password;
+//    private String role;
     List<Movie> wishList = new ArrayList<>();
 
     public void addMovieToWishList(Movie movie) {

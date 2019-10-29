@@ -4,6 +4,7 @@ import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.models.User;
 import io.tastycats.movierental.rental.repos.MovieRepo;
 import io.tastycats.movierental.rental.repos.UserRepo;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -133,6 +134,13 @@ public class TestUserServiceMockito {
 //        Mockito.when(movieService.)
     }
 
+    @AfterEach
+    public void deleteEverything(){
+        movieList.clear();
+        movieRepo.deleteAll();
+        userList.clear();
+        userRepo.deleteAll();
+    }
     @Test
     public void testGetUsers(){
         Assertions.assertEquals(userService.getUsers(),userList);

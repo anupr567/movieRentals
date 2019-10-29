@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface LibraryRepo extends MongoRepository<Library, String> {
     public List<Library> findAll();
-    public Optional<Library> findBookingByUserId(String userId);
-    public Optional<Library> findBookingByMovieId(String MovieId);
+    public List<Library> findByUserId(String userId);
+    public List<Library> findByMovieId(String MovieId);
 }

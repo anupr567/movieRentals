@@ -133,6 +133,8 @@ public class TestUserRepo {
     public void cleanObjects() {
         movieRepo.deleteAll();
         userRepo.deleteAll();
+        movieList.clear();
+        userList.clear();
     }
 
     @Test

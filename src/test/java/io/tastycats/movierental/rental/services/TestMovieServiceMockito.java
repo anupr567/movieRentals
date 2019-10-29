@@ -3,6 +3,7 @@ package io.tastycats.movierental.rental.services;
 
 import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.repos.MovieRepo;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +97,13 @@ public class TestMovieServiceMockito {
         Mockito.when(movieRepo.saveAll(movieList)).thenReturn(movieList);
         Mockito.when(movieRepo.findAll()).thenReturn(movieList);
 //        Mockito.when(mov)
+    }
+
+    @AfterEach
+    public void deleteEverything(){
+        movieList.clear();
+        movieRepo.deleteAll();
+
     }
 
     @Test

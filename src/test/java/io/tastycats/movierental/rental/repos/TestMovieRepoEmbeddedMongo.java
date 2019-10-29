@@ -78,6 +78,7 @@ public class TestMovieRepoEmbeddedMongo {
     @AfterEach
     public void cleanObjects() {
         movieRepo.deleteAll();
+        movieList.clear();
     }
 
     @Test

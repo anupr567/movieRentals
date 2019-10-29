@@ -1,32 +1,33 @@
 package io.tastycats.movierental.rental.repos;
 
+
+import io.tastycats.movierental.rental.models.Library;
 import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.models.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-//import org.springframework.test.context.ActiveProfiles;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-public class TestUserRepo {
+public class testLibraryRepo {
 
     @Autowired
-    private UserRepo userRepo;
+    private LibraryRepo libraryRepo;
 
     @Autowired
-    private MovieRepo movieRepo;
+            private MovieRepo movieRepo;
+    @Autowired
+            private UserRepo userRepo;
 
     Pageable pageable;
 
@@ -38,6 +39,8 @@ public class TestUserRepo {
     User user1, user2;
     List<User> userList = new ArrayList<>();
 
+    Library library1, library2, library3;
+    List<Library> libraryList = new ArrayList<>();
 
     @BeforeEach
     public void setupObjects() {
@@ -127,40 +130,26 @@ public class TestUserRepo {
             userList.add(user2);
             userRepo.saveAll(userList);
         }
+
+        // setting up Library Database
+        if(true){
+            library1 = new Library();
+            library2 = new Library();
+            library3 = new Library();
+            library1.setMovieId(testMovie1.getId());
+            library1.setBookingDate(LocalDate.now());
+            library1.setReturnDate(LocalDate.now().plusDays(14));
+            library1.setUserId(user1.getId());
+
+            library2.setUserId(user2.getId());
+            library2.setBookingDate(LocalDate.now().minusDays(2));
+            library2.setBookingDate(LocalDate.now().plusDays(12));
+            library2.setMovieId(testMovie2.getId());
+
+            library3.setMovieId(testMovie2.getId());
+            library3.setBookingDate(LocalDate.now().minusDays(10));
+            library3.setReturnDate(LocalDate.now().plusDays(4));
+            library3.setUserId(user1.getId());
+        }
     }
-
-    @AfterEach
-    public void cleanObjects() {
-        movieRepo.deleteAll();
-        userRepo.deleteAll();
-    }
-
-    @Test
-    public void userRepoCanStore(){
-        Assertions.assertEquals(
-                userList.size(),
-                userRepo.findAll().size()
-        );
-        Assertions.assertEquals(
-                userList.get(randomInt).getAddress(),
-                userRepo.findAll().get(randomInt).getAddress()
-        );
-        randomInt = random.nextInt(2);
-        Assertions.assertEquals(
-                userList.get(randomInt).getPresentBookingIds(),
-                userRepo.findAll().get(randomInt).getPresentBookingIds()
-        );
-
-        Assertions.assertEquals(
-                userList.get(randomInt),
-                userRepo.save(userList.get(randomInt))
-        );
-
-
-        Assertions.assertEquals(
-                userList.get(randomInt).getWishList(),
-                userRepo.save(userList.get(randomInt)).getWishList()
-        );
-    }
-
 }

@@ -130,7 +130,7 @@ public class TestUserServiceMockito {
         Mockito.when(userRepo.saveAll(userList)).thenReturn(userList);
         Mockito.when(userRepo.save(user1)).thenReturn(user1);
         Mockito.when(userRepo.findById(user1.getId())).thenReturn(java.util.Optional.of(user1));
-        Mockito.when(movieService.)
+//        Mockito.when(movieService.)
     }
 
     @Test

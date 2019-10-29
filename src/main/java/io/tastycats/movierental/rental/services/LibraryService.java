@@ -55,7 +55,12 @@ public class LibraryService {
     public List<Library> getAllBookings() {
         return libraryRepo.findAll();
     }
-
+    public List<Library> getByUserId(String userId){
+        return libraryRepo.findByUserId(userId);
+    }
+    public List<Library> getByMovieId(String movieId ){
+        return libraryRepo.findByMovieId(movieId);
+    }
     public Library returnMovie(String bookingId) {
         Library booking = libraryRepo.findById(bookingId).get();
         String movieId = booking.getMovieId();

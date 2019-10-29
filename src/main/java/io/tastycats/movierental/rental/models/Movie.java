@@ -34,4 +34,5 @@ public class Movie {
 
     private String cardImageUrl;
     private String posterImageUrl;
+    private String description;
 }

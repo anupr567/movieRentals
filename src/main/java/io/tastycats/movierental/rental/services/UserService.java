@@ -47,14 +47,17 @@ public class UserService implements UserServiceInterface {
         return userRepo.findAll();
     }
 
+    @Override
     public User addMovieToWishList(String userId,String movieId) {
         User user = getUserById(userId);
         Movie movie = movieService.getMovieById(movieId);
         user.addMovieToWishList(movie);
         return userRepo.save(user);
     }
-    public User getWishList(String id) {
-        return userRepo.findById(id).get();
+
+    @Override
+    public List<Movie> getWishList(String id) {
+        return userRepo.findById(id).get().getWishList();
     }
 
 //    @Override

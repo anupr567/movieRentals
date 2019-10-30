@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/library")
+@RequestMapping("/booking")
 public class LibraryController {
     private static Logger logger = LoggerFactory.getLogger(LibraryController.class);
 
@@ -29,6 +30,11 @@ public class LibraryController {
     @GetMapping
     public List<Library> getAllBookings() {
         return libraryService.getAllBookings();
+    }
+
+    @GetMapping("/{id}")
+    public Library getBookingById(@PathVariable("id") String id) {
+        return libraryService.getBookingById(id);
     }
 
     @PostMapping("/rent")

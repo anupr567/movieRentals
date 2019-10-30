@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+  ui:
+    image: movieui
+    depends_on:
+      - api
+    ports:
+      - "8000:8000"
   api:
     build:
       context: .

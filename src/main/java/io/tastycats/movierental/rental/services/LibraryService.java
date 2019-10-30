@@ -82,4 +82,8 @@ public class LibraryService {
 
         return booking;
     }
+
+    public Library getBookingById(String id) {
+        return libraryRepo.findById(id).orElse(null);
+    }
 }

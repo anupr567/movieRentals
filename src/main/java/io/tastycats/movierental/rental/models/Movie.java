@@ -32,6 +32,6 @@ public class Movie {
 
     private int copiesAvailable;
 
-    private String cardImageUrl;
-    private String posterImageUrl;
+    private String coverImageSrc;
+    private String posterImageSrc;
 }

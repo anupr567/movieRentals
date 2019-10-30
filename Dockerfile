@@ -27,4 +27,4 @@ RUN ls /movie-rentals/
 
 EXPOSE 8080
 
-CMD cd /movie-rentals/ && mvn package && mvn spring-boot:run
+CMD cd /movie-rentals/ && mvn package && mvn spring-boot:run -DskipTests

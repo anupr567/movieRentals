@@ -24,4 +24,5 @@ public class Library {
     private LocalDate bookingDate;
     private LocalDate returnDate;
     private String userId;
+    private boolean active; // whether it is active booking or past booking
 }

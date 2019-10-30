@@ -1,6 +1,7 @@
 package io.tastycats.movierental.rental.controllers;
 
 
+import io.tastycats.movierental.rental.models.Movie;
 import io.tastycats.movierental.rental.models.User;
 import io.tastycats.movierental.rental.services.UserService;
 import org.slf4j.Logger;
@@ -41,9 +42,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}/wishList")
-    public User getUserWishList(@PathVariable("id") String id) {
+    public List<Movie> getUserWishList(@PathVariable("id") String id) {
         try{
-            User user = userService.getWishList(id);
+            List<Movie> movieWishList = userService.getWishList(id);
         } catch (Exception e){
             logger.error("No such User Id exist for getting the Wishlist by UserId");
         }

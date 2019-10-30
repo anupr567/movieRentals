@@ -34,4 +34,5 @@ public class Movie {
 
     private String coverImageSrc;
     private String posterImageSrc;
+    private String description;
 }

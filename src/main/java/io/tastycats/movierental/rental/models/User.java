@@ -28,6 +28,7 @@ public class User {
     private List<String> presentBookingIds = new ArrayList<>();
     private List<String> historyBookingIds = new ArrayList<>();
     private int fine = 0;
+    private String dpUrl;
 
 //    @Indexed(unique = true)
 //    private String userName;
